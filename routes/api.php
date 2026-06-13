@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\PelangganController;
 use App\Http\Controllers\Api\SupplierController;
 use App\Http\Controllers\Api\PembelianController;
+use App\Http\Controllers\Api\ProfilController;
 
 
 Route::apiResource('users', UserApiController::class);
@@ -37,6 +38,12 @@ Route::middleware('auth:sanctum')->group(function () {
         return $request->user();
     });
     Route::post('logout', [AuthController::class, 'logout']);
+
+    // Profil
+    Route::get('/profil', [ProfilController::class, 'show']);
+    Route::put('/profil', [ProfilController::class, 'update']);
+    Route::put('/profil/password', [ProfilController::class, 'updatePassword']);
+    Route::post('/profil/foto', [ProfilController::class, 'uploadFoto']);
 
     // Supplier
     Route::get('/suppliers', [SupplierController::class, 'index']);
